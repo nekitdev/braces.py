@@ -1,5 +1,5 @@
-gd.py
-=====
+braces.py
+=========
 
 .. image:: https://img.shields.io/pypi/l/braces.py.svg
     :target: https://opensource.org/licenses/MIT
@@ -25,7 +25,7 @@ gd.py
     :target: https://patreon.com/nekit
     :alt: Patreon Page [Support]
 
-braces.py is a library that allows using `{}` braces and `;` for indentation.
+braces.py is a library that allows using ``{}`` braces and ``;`` for indentation.
 
 Warning
 -------
@@ -52,7 +52,7 @@ To install the library, you can just run the following command:
     python3 -m pip install -U braces.py
 
     # Windows
-    py -3 -m pip install -U gd.py
+    py -3 -m pip install -U braces.py
 
 In order to install the library from source, you can do the following:
 
