@@ -2,15 +2,17 @@ from collections import namedtuple
 from io import StringIO
 import tokenize
 
+import black  # type: ignore  # does not see type hints
+
 from .const import EXCEPT, INDENT, NEWLINE, TOKEN
 
-__all__ = ('test_compile', 'transform', 'SmallToken')
+__all__ = ("test_compile", "transform", "SmallToken")
 
-SmallToken = namedtuple('SmallToken', 'type string')
+SmallToken = namedtuple("SmallToken", "type string")
 
 
 def test_compile(code: str) -> None:
-    compile(code, '<test>', 'exec')
+    compile(code, "<test>", "exec")
 
 
 def transform(code: str) -> str:
@@ -40,14 +42,14 @@ def transform(code: str) -> str:
     # go through brace tokens and find pairs using context method
     for token in braces:
         if token.exact_type == TOKEN.LBRACE:
-            contexts.append([tokens.index(token), None])
+            contexts.append([tokens.index(token), -1])
         else:
             for context in reversed(contexts):
-                if context[1] is None:
+                if context[1] == -1:
                     context[1] = tokens.index(token)
                     break
             else:
-                raise SyntaxError('Unmatched braces found.')
+                raise SyntaxError("Unmatched braces found.")
 
     offset = 0
 
@@ -55,17 +57,17 @@ def transform(code: str) -> str:
     for indent, (start, end) in enumerate(contexts, 1):
 
         # replace '{' with ':'
-        result[start + offset] = SmallToken(TOKEN.COLON, ':')
+        result[start + offset] = SmallToken(TOKEN.COLON, ":")
 
         # look if next is '\n' and add newline if it is not
         offset += 1
         if result[start + offset].type in NEWLINE:
             offset -= 1
         else:
-            result.insert(start + offset, SmallToken(TOKEN.NL, '\n'))
+            result.insert(start + offset, SmallToken(TOKEN.NL, "\n"))
 
         # replace '}' with dedent
-        result[end + offset] = SmallToken(TOKEN.DEDENT, '')
+        result[end + offset] = SmallToken(TOKEN.DEDENT, "")
 
         # add indent
         offset += 1
@@ -73,15 +75,17 @@ def transform(code: str) -> str:
 
     offset = 0
 
-    for index, token in enumerate(result.copy()):
+    for index, small_token in enumerate(result.copy()):
         # find and remove unused ';', adding newlines if needed
-        if token.string == ';':
+        if small_token.string == ";":
             if result[index - offset + 1].type in NEWLINE:
                 result.pop(index - offset)
                 offset += 1
             else:
-                result[index - offset] = (TOKEN.NL, '\n')
+                result[index - offset] = SmallToken(TOKEN.NL, "\n")
 
     final = tokenize.untokenize(result)
+
+    final = black.format_str(final, mode=black.FileMode(line_length=100))
 
     return final
