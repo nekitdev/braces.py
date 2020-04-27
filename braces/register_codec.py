@@ -17,8 +17,7 @@ def decode(source: Union[bytes, memoryview], errors: str = "strict") -> str:
 def braces_decode(
     source: Union[bytes, memoryview], errors: str = "strict"
 ) -> Tuple[str, int]:
-    result = decode(source)
-    return result, len(result)
+    return decode(source), len(source)
 
 
 def transform_stream(stream: Any) -> StringIO:
