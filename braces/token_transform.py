@@ -86,6 +86,9 @@ def transform(code: str) -> str:
 
     final = tokenize.untokenize(result)
 
-    final = "\n\n" + black.format_str(final, mode=black.FileMode(line_length=100))
+    newline = "\n"
+    newlines = len(final) - len(final.lstrip(newline))
+
+    final = newline * newlines + black.format_str(final, mode=black.FileMode(line_length=100))
 
     return final
