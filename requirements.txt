@@ -1,1 +1,1 @@
-black>=19.3
+black
