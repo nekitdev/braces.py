@@ -14,7 +14,7 @@ braces.py
     :alt: Required Python Versions
 
 .. image:: https://img.shields.io/pypi/status/braces.py.svg
-    :target: https://github.com/NeKitDS/braces.py/blob/master/braces
+    :target: https://github.com/NeKitDS/braces.py
     :alt: Project Development Status
 
 .. image:: https://img.shields.io/pypi/dm/braces.py.svg

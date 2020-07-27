@@ -4,7 +4,7 @@ __title__ = "braces"
 __author__ = "NeKitDS"
 __copyright__ = "Copyright 2020 NeKitDS"
 __license__ = "MIT"
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 from collections import namedtuple
 import re
