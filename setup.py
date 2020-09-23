@@ -25,10 +25,10 @@ readme = (root / "README.rst").read_text("utf-8")
 
 setup(
     name="braces.py",
-    author="NeKitDS",
+    author="nekitdev",
     author_email="gdpy13@gmail.com",
-    url="https://github.com/NeKitDS/braces.py",
-    project_urls={"Issue tracker": "https://github.com/NeKitDS/braces.py/issues"},
+    url="https://github.com/nekitdev/braces.py",
+    project_urls={"Issue tracker": "https://github.com/nekitdev/braces.py/issues"},
     version=version,
     packages=["braces"],
     license="MIT",

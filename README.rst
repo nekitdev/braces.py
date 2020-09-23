@@ -14,7 +14,7 @@ braces.py
     :alt: Required Python Versions
 
 .. image:: https://img.shields.io/pypi/status/braces.py.svg
-    :target: https://github.com/NeKitDS/braces.py
+    :target: https://github.com/nekitdev/braces.py
     :alt: Project Development Status
 
 .. image:: https://img.shields.io/pypi/dm/braces.py.svg
@@ -58,7 +58,7 @@ In order to install the library from source, you can do the following:
 
 .. code:: sh
 
-    $ git clone https://github.com/NeKitDS/braces.py
+    $ git clone https://github.com/nekitdev/braces.py
     $ cd braces.py
     $ python -m pip install -U .
 
@@ -84,5 +84,5 @@ You can find more examples in examples directory.
 Authors
 -------
 
-This project is mainly developed by `NeKitDS <https://github.com/NeKitDS>`_,
+This project is mainly developed by `nekitdev <https://github.com/nekitdev>`_,
 with help of `isidentical <https://github.com/isidentical>`_.

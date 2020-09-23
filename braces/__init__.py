@@ -1,10 +1,10 @@
 """Library that implements braces for Python Programming Language."""
 
 __title__ = "braces"
-__author__ = "NeKitDS"
-__copyright__ = "Copyright 2020 NeKitDS"
+__author__ = "nekitdev"
+__copyright__ = "Copyright 2020 nekitdev"
 __license__ = "MIT"
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 from collections import namedtuple
 import re
