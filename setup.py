@@ -26,7 +26,7 @@ readme = (root / "README.rst").read_text("utf-8")
 setup(
     name="braces.py",
     author="nekitdev",
-    author_email="gdpy13@gmail.com",
+    author_email="nekitdevofficial@gmail.com",
     url="https://github.com/nekitdev/braces.py",
     project_urls={"Issue tracker": "https://github.com/nekitdev/braces.py/issues"},
     version=version,
