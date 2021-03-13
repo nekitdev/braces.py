@@ -34,9 +34,9 @@ There is a known limitation in braces.py. That is, indentation like this does **
 
 .. code:: python
 
-    def f(x)
+    def identity(value)
     {
-        return x;
+        return value;
     }
 
 Installing
@@ -73,10 +73,11 @@ Below is an example of identity function using braces style.
 
     from typing import TypeVar;
 
-    T = TypeVar('T');
+    T = TypeVar("T");
 
-    def identity(x: T) -> T {
-        return x;
+
+    def identity(some: T) -> T {
+        return some;
     }
 
 You can find more examples in examples directory.

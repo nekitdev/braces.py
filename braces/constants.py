@@ -1,12 +1,16 @@
 import token as TOKEN
 
-__all__ = ("EXCEPT", "INDENT", "NEWLINE", "TOKEN")
+__all__ = ("EXCEPT", "INDENT", "LINE_LENGTH", "TOKEN")
+
+LINE_LENGTH = 100
 
 TOKEN.COLONEQUAL = 0xFF  # for 3.8 onward
 
-INDENT = " " * 4
+SPACE = " "
 
-NEWLINE = {TOKEN.NEWLINE, TOKEN.NL}
+INDENT = SPACE * 4
+
+NEWLINES = {TOKEN.NEWLINE, TOKEN.NL}
 
 EXCEPT = {
     TOKEN.NEWLINE,  # \n

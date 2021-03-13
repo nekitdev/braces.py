@@ -1,20 +1,29 @@
 # coding: braces
 
-from typing import List, Union;
+from typing import Iterator, Union
 
-def fizzbuzz(n: int) -> List[Union[int, str]] {
-    assert n > 0;
-    result = [];
+
+def fizzbuzz(n: int) -> Iterator[Union[int, str]] {
     for x in range(n) {
-        buffer = '';
+        value = "";
+
         if not x % 3 {
-            buffer += 'fizz';
-        } if not x % 5 {
-            buffer += 'buzz';
+            value += "fizz";
         }
-        result.append(buffer if buffer else x);
+
+        if not x % 5 {
+            value += "buzz";
+        }
+
+        if value {
+            yield value;
+        } else {
+            yield x;
+        }
     }
-    return result;
 }
 
-print(*fizzbuzz(100));
+
+for some in fizzbuzz(100) {
+    print(some);
+}

@@ -1,8 +1,9 @@
 # coding: braces
 
-from typing import Generator;
+from typing import Iterator;
 
-def fib(n: int) -> Generator[int, None, None] {
+
+def fib(n: int) -> Iterator[int] {
     assert n > 0;
     a, b = 0, 1;
 
@@ -12,5 +13,6 @@ def fib(n: int) -> Generator[int, None, None] {
         a, b = b, a + b;
     }
 }
+
 
 print(*fib(10));

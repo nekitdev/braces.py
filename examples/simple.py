@@ -2,8 +2,9 @@
 
 from typing import TypeVar;
 
-T = TypeVar('T');
+T = TypeVar("T");
 
-def identity(x: T) -> T {
-    return x;
+
+def identity(some: T) -> T {
+    return some;
 }

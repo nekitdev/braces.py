@@ -1,1 +1,1 @@
-import braces.register_codec
+import braces.encoding
