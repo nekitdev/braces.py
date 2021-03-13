@@ -81,7 +81,16 @@ def get_context(start: int = NOT_SET, end: int = NOT_SET) -> Context:
     return Context(start, end)
 
 
-ALLOWED_KEYWORDS = {"False", "True", "None", "else"}
+ALLOWED_KEYWORDS = {
+    "False",
+    "True",
+    "None",
+    "else",
+    "except",
+    "finally",
+    "lambda",
+    "try",
+}
 
 
 def is_keyword(string: str) -> bool:
