@@ -80,6 +80,18 @@ Below is an example of identity function using braces style.
         return some;
     }
 
+This snippet gets translated to syntactically valid python code:
+
+.. code:: python
+
+    from typing import TypeVar
+
+    T = TypeVar("T")
+
+
+    def identity(some: T) -> T:
+        return some
+
 You can find more examples in examples directory.
 
 Authors
