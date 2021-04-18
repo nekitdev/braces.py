@@ -1,11 +1,23 @@
-from distutils.sysconfig import get_python_lib
 from pathlib import Path
 import re
 import site
 
 from setuptools import setup  # type: ignore  # no stubs or types
 
-site_packages = Path(next(reversed(site.getsitepackages())))  # use last site packages path
+for site_packages_path in reversed(site.getsitepackages()):
+    site_packages = Path(site_packages_path)
+
+    if site_packages.exists():
+        break
+
+else:
+    site_packages = Path(site.USER_SITE)
+
+try:
+    (site_packages / "braces.pth").touch()  # attempt to create the path file
+
+except OSError:
+    site_packages = Path(site.USER_SITE)
 
 root = Path(__file__).parent
 
@@ -22,7 +34,7 @@ if result is None:
 
 version = result.group(1)
 
-readme = (root / "README.rst").read_text("utf-8")
+long_description = (root / "README.rst").read_text("utf-8")
 
 # copy braces path file from the root directory into site packages
 (site_packages / "braces.pth").write_text((root / "braces.pth").read_text("utf-8"), "utf-8")
@@ -39,7 +51,7 @@ setup(
     packages=["braces"],
     license="MIT",
     description="Braces for Python Programming Language.",
-    long_description=readme,
+    long_description=long_description,
     long_description_content_type="text/x-rst",
     include_package_data=True,
     install_requires=requirements,
