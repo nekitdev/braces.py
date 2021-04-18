@@ -7,7 +7,7 @@ braces.py
 
 .. image:: https://img.shields.io/pypi/v/braces.py.svg
     :target: https://pypi.python.org/pypi/braces.py
-    :alt: PyPI Library Version
+    :alt: Library Version
 
 .. image:: https://img.shields.io/pypi/pyversions/braces.py.svg
     :target: https://pypi.python.org/pypi/braces.py
@@ -15,15 +15,15 @@ braces.py
 
 .. image:: https://img.shields.io/pypi/status/braces.py.svg
     :target: https://github.com/nekitdev/braces.py
-    :alt: Project Development Status
+    :alt: Development Status
 
-.. image:: https://img.shields.io/pypi/dm/braces.py.svg
+.. image:: https://img.shields.io/pypi/dw/braces.py.svg
     :target: https://pypi.python.org/pypi/braces.py
-    :alt: Library Downloads/Month
+    :alt: Library Downloads / Week
 
-.. image:: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.herokuapp.com%2Fnekit%2Fpledges
-    :target: https://patreon.com/nekit
-    :alt: Patreon Page [Support]
+.. image:: https://app.codacy.com/project/badge/Grade/6c8b6893a1204953bf4fec15c0c080fd
+    :target: https://www.codacy.com/gh/nekitdev/iters.py/dashboard
+    :alt: Code Quality
 
 braces.py is a library that allows using ``{}`` braces and ``;`` for indentation.
 
@@ -34,10 +34,13 @@ There is a known limitation in braces.py. That is, indentation like this does **
 
 .. code:: python
 
-    def identity(value)
+    def identity(value: T) -> T
     {
         return value;
     }
+
+The said limitation was partially intentional,
+as it brings more problems than solutions in analysis.
 
 Installing
 ----------
@@ -48,11 +51,11 @@ To install the library, you can just run the following command:
 
 .. code:: sh
 
-    # Linux/OS X
-    python3 -m pip install -U braces.py
+    # Linux / OS X
+    python3 -m pip install --upgrade braces.py
 
     # Windows
-    py -3 -m pip install -U braces.py
+    py -3 -m pip install --upgrade braces.py
 
 In order to install the library from source, you can do the following:
 
@@ -60,7 +63,7 @@ In order to install the library from source, you can do the following:
 
     $ git clone https://github.com/nekitdev/braces.py
     $ cd braces.py
-    $ python -m pip install -U .
+    $ python -m pip install --upgrade .
 
 Quick example
 -------------

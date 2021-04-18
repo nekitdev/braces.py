@@ -1,10 +1,10 @@
 from io import StringIO
 from keyword import iskeyword
 from tokenize import TokenInfo
-from typing import Iterable, Iterator, Tuple
+from typing import Iterable, Iterator, Tuple, cast
 import tokenize
 
-import black  # type: ignore  # does not see type hints
+import black
 
 from braces.constants import EXCEPT, INDENT, LINE_LENGTH, NEWLINES, TOKEN
 
@@ -21,7 +21,7 @@ __all__ = (
 # from tokenize module here; basically, we can pass (type, value)
 # pairs instead of tokens that handle their position and so on;
 # we are going to get quite a messy output, but this can be easily
-# solved via applying black to the result we get.
+# solved via applying some nifty formatter to the result we get.
 
 EMPTY = ""
 
@@ -52,7 +52,7 @@ def into_real_tokens(code: str) -> Iterator[TokenInfo]:
 
 
 def from_real_tokens(tokens: Iterable[TokenInfo]) -> str:
-    return tokenize.untokenize(tokens)
+    return cast(str, tokenize.untokenize(tokens))
 
 
 def into_tokens(code: str) -> Iterator[Token]:
@@ -61,7 +61,7 @@ def into_tokens(code: str) -> Iterator[Token]:
 
 
 def from_tokens(tokens: Iterable[Token]) -> str:
-    return tokenize.untokenize(token.as_tuple() for token in tokens)
+    return cast(str, tokenize.untokenize(token.as_tuple() for token in tokens))
 
 
 NOT_SET = -1
@@ -108,6 +108,7 @@ def transform(code: str, add_lines: bool = False) -> str:
     level = 0
 
     # stage 1: distinguish between braces in code and dictionaries or sets
+
     for token in tokens:
         if token.type == TOKEN.LBRACE:  # {
             if (
@@ -132,6 +133,7 @@ def transform(code: str, add_lines: bool = False) -> str:
     contexts = []
 
     # stage 2: find matching braces
+
     for token in braces:
         if token.type == TOKEN.LBRACE:  # {
             contexts.append(get_context(tokens.index(token)))
@@ -148,6 +150,7 @@ def transform(code: str, add_lines: bool = False) -> str:
     offset = 0
 
     # stage 3: replace braces with appropriate syntax
+
     for indent, context in enumerate(contexts, 1):
         # get values from the context
         start = context.start
@@ -184,7 +187,8 @@ def transform(code: str, add_lines: bool = False) -> str:
     offset = 0
 
     # stage 4: find and remove unused semicolons, adding newlines if needed
-    for index, token in enumerate(tokens.copy()):
+
+    for index, token in enumerate(tokens.copy()):  # copying because we are going to modify tokens
         if token.type == TOKEN.SEMI:
             next = tokens[index - offset + 1]
 
@@ -210,4 +214,4 @@ def transform(code: str, add_lines: bool = False) -> str:
 
 
 def transform_back(code: str, semicolons: bool = True) -> str:
-    ...
+    ...  # TODO: implement this, obviously, when one has time to devote into this library

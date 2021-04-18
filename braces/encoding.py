@@ -1,7 +1,7 @@
 import codecs
 import encodings
 from io import StringIO
-from typing import Any, Optional, Sequence, Tuple, TypeVar
+from typing import Any, Optional, Tuple, TypeVar
 
 from braces.transform import transform
 
@@ -14,15 +14,13 @@ EMPTY = ""
 UTF_8 = "utf-8"
 STRICT = "strict"
 
-B = TypeVar(
-    "B", bound=Sequence[int]
-)  # Sequence[int] can be converted to bytes
+B = TypeVar("B", bytes, bytearray, memoryview)
 
 utf_8 = encodings.search_function(UTF_8)
 
 
 def decode(
-    source: B, encoding: str = UTF_8, errors: str = STRICT, **transform_args
+    source: B, encoding: str = UTF_8, errors: str = STRICT, **transform_args: Any
 ) -> str:
     return transform(bytes(source).decode(encoding, errors), **transform_args)
 
@@ -31,13 +29,13 @@ def encode(
     source: B,
     encoding: str = UTF_8,
     errors: str = STRICT,
-    **transform_back_args
+    **transform_back_args: Any
 ) -> str:
     ...
 
 
 def braces_decode(source: B, errors: str = STRICT) -> Tuple[str, int]:
-    code, length = utf_8.decode(source, errors)  # type: ignore
+    code, length = utf_8.decode(source, errors)
 
     return transform(code, add_lines=True), length
 
@@ -58,10 +56,10 @@ class BracesIncrementalDecoder(codecs.BufferedIncrementalDecoder):
 
 
 class BracesStreamReader(utf_8.streamreader):  # type: ignore
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        self.stream = transform_stream(self.stream)  # type: StringIO
+        self.stream: StringIO = transform_stream(self.stream)
 
 
 def search_function(encoding: str) -> Optional[codecs.CodecInfo]:
@@ -71,7 +69,7 @@ def search_function(encoding: str) -> Optional[codecs.CodecInfo]:
     # assume utf-8 encoding
     return codecs.CodecInfo(
         name=BRACES,
-        encode=utf_8.encode,  # type: ignore
+        encode=utf_8.encode,
         decode=braces_decode,  # type: ignore
         incrementalencoder=utf_8.incrementalencoder,
         incrementaldecoder=BracesIncrementalDecoder,

@@ -2,17 +2,18 @@ import token as TOKEN
 
 __all__ = ("EXCEPT", "INDENT", "LINE_LENGTH", "TOKEN")
 
-LINE_LENGTH = 100
+LINE_LENGTH = 100  # line length to use while formatting code
 
-TOKEN.COLONEQUAL = 0xFF  # for 3.8 onward
+TOKEN.COLONEQUAL = 0xFF  # for versions that have assignment expressions implemented
 
 SPACE = " "
 
-INDENT = SPACE * 4
+INDENT_LENGTH = 4  # length of indentation to use
+INDENT = SPACE * INDENT_LENGTH  # actual string to apply as one indent
 
-NEWLINES = {TOKEN.NEWLINE, TOKEN.NL}
+NEWLINES = {TOKEN.NEWLINE, TOKEN.NL}  # tokens that are considered as newlines
 
-EXCEPT = {
+EXCEPT = {  # symbols after which we do not expect to have {...} used for indentation
     TOKEN.NEWLINE,  # \n
     TOKEN.NL,  # \n
     TOKEN.LPAR,  # (
