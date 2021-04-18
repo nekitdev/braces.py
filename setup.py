@@ -1,10 +1,11 @@
 from distutils.sysconfig import get_python_lib
 from pathlib import Path
 import re
+import site
 
-from setuptools import setup  # type: ignore  # no stubs/types
+from setuptools import setup  # type: ignore  # no stubs or types
 
-SITE_PACKAGES = get_python_lib()
+site_packages = Path(next(reversed(site.getsitepackages())))  # use last site packages path
 
 root = Path(__file__).parent
 
@@ -23,6 +24,8 @@ version = result.group(1)
 
 readme = (root / "README.rst").read_text("utf-8")
 
+# copy braces path file from the root directory into site packages
+(site_packages / "braces.pth").write_text((root / "braces.pth").read_text("utf-8"), "utf-8")
 
 setup(
     name="braces.py",
@@ -42,15 +45,16 @@ setup(
     install_requires=requirements,
     python_requires=">=3.5",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Typing :: Typed",
         "Natural Language :: English",
         "Operating System :: OS Independent",
     ],
-    data_files=[(SITE_PACKAGES, ["braces.pth"])],
 )
