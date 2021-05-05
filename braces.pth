@@ -1,5 +1,1 @@
-try:
-    import braces.encoding
-
-except ImportError:
-    pass  # failed to import, but do not throw errors
+import sys; exec("try:\n    import braces.encoding\nexcept ImportError:\n    pass")
