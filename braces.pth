@@ -1,1 +1,5 @@
-import braces.encoding
+try:
+    import braces.encoding
+
+except ImportError:
+    pass  # failed to import, but do not throw errors
